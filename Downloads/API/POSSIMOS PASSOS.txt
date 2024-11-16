@@ -1,9 +1,0 @@
-// POSSIMOS PASSOS
-
-adcionar um get id
-adcioanr um put 
-verificar as rotas de http://127.0.0.1:8000/docs#
-para rodar o front: npm start
-para rodar o back: uvicorn app:app --reload
-verificar se esta consumindo meu csv - posso mudar o arquivo
-Mudar a interface do front
