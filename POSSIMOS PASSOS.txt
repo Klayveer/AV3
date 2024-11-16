@@ -1,0 +1,14 @@
+// POSSIMOS PASSOS
+
+mudar backend
+criar um banco de dados
+criar interfaces do front - em react
+
+adcionar um get id
+adcioanr um put 
+
+verificar as rotas de http://127.0.0.1:8000/docs#
+para rodar o front: npm start
+para rodar o back: uvicorn app:app --reload
+
+os garficos so serão mostrados para geração de "relatório mensal"
