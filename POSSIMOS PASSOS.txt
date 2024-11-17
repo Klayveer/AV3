@@ -1,14 +1,13 @@
 // POSSIMOS PASSOS
 
-mudar backend
-criar um banco de dados
-criar interfaces do front - em react
+para rodar o front: 'npm start' (http://localhost:3000/)
+para rodar o back: 'uvicorn app:app --reload' (http://127.0.0.1:8000/docs#/)
 
-adcionar um get id
-adcioanr um put 
+-> falta configurar o front como um todo
 
-verificar as rotas de http://127.0.0.1:8000/docs#
-para rodar o front: npm start
-para rodar o back: uvicorn app:app --reload
+os graficos so serão mostrados para geração de "relatório mensal" - adcioanr dps do front configuado
 
-os garficos so serão mostrados para geração de "relatório mensal"
+ver todos os requirements
+configurar o README 
+
+# estou usando um json como bd
