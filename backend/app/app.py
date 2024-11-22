@@ -8,7 +8,8 @@ import os
 app = FastAPI()
 
 # Caminho para o arquivo JSON (atualize para o caminho absoluto correto)
-JSON_FILE_PATH = r"C:\Users\Klayveer Nascimento\Downloads\api\backend\app\data.json"
+# JSON_FILE_PATH = r"C:\Users\Klayveer Nascimento\Downloads\api\backend\app\data.json"
+JSON_FILE_PATH = r"C:\Users\07517594575\Downloads\AV3\backend\app\data.json"
 
 # Função para carregar os dados do JSON
 def load_json_data():
