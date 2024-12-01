@@ -47,18 +47,17 @@ function aplicarFiltros(tipo = filtroTipo) {
 
     // Se um tipo específico for selecionado (diferente de "Geral"), adiciona ao endpoint
     if (tipo && tipo !== "Geral" && TIPOS_RESIDUOS.includes(tipo)) {
-        url += `tipo/${encodeURIComponent(tipo)}`;
+        url += `tipo/${encodeURIComponent(tipo)}`; // Corrigido para garantir que o tipo seja adicionado corretamente
     }
 
     console.log("URL chamada: ", url); // Verifica a URL gerada
 
-    fetchDados(url);
+    fetchDados(url, tipo);
 }
 
 // Função para buscar dados do backend
-async function fetchDados(url) {
+async function fetchDados(url, tipo) {
     try {
-        console.log(`Buscando dados na URL: ${url}`); // Verifica a URL chamada
         const response = await fetch(url);
         
         if (!response.ok) {
@@ -66,23 +65,74 @@ async function fetchDados(url) {
         }
 
         const data = await response.json();
-        console.log("Dados retornados:", data); // Verifica os dados retornados
 
         if (data.length === 0) {
             alert("Nenhum dado encontrado para este filtro.");
-            return; // Se não houver dados, sai da função
+            return;
         }
 
-        atualizarDashboard(data);
+        atualizarDashboard(data, tipo);
         atualizarTabela(data);
     } catch (error) {
         console.error("Erro ao buscar dados:", error);
     }
 }
 
+// Função para buscar o peso do último dia do mês
+async function fetchUltimoDiaMes(anoMes, tipo) {
+    const url = `${BASE_URL}mes/${anoMes}`;
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Erro na requisição. Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const filtrados = data.filter(item => item.residue_type === tipo);
+
+        if (filtrados.length === 0) return 0;
+
+        // Ordena por data e pega o peso do último dia
+        const ultimoRegistro = filtrados.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+        return parseFloat(ultimoRegistro.weight) || 0;
+    } catch (error) {
+        console.error("Erro ao buscar dados do último dia do mês:", error);
+        return 0;
+    }
+}
+
 // Função para atualizar o dashboard
-function atualizarDashboard(data) {
+async function atualizarDashboard(data, tipo) {
     const pesoTotal = data.reduce((total, item) => total + parseFloat(item.weight), 0);
+
+    // Define os meses para comparação
+    const hoje = new Date();
+    const mesAtual = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}`;
+    const mesAnterior = hoje.getMonth() === 0
+        ? `${hoje.getFullYear() - 1}-12`
+        : `${hoje.getFullYear()}-${String(hoje.getMonth()).padStart(2, '0')}`;
+    const mesDoisMesesAtras = hoje.getMonth() <= 1
+        ? `${hoje.getFullYear() - 1}-${String(12 - (1 - hoje.getMonth())).padStart(2, '0')}`
+        : `${hoje.getFullYear()}-${String(hoje.getMonth() - 1).padStart(2, '0')}`;
+
+    let pesoUltimoDiaMesAtual = 0;
+    let pesoUltimoDiaMesAnterior = 0;
+
+    if (tipo && tipo !== "Geral") {
+        pesoUltimoDiaMesAtual = await fetchUltimoDiaMes(mesAnterior, tipo);
+        pesoUltimoDiaMesAnterior = await fetchUltimoDiaMes(mesDoisMesesAtras, tipo);
+    }
+
+    // Calcula a diferença percentual
+    const diferencaPercentual = pesoUltimoDiaMesAnterior
+        ? (((pesoUltimoDiaMesAtual - pesoUltimoDiaMesAnterior) / pesoUltimoDiaMesAnterior) * 100).toFixed(1)
+        : 0;
+
+    comparativoElement.textContent = pesoUltimoDiaMesAnterior
+        ? `Diferença: ${diferencaPercentual > 0 ? "+" : ""}${diferencaPercentual}%`
+        : "Sem dados para comparação";
+
     const tipoResiduos = data.reduce((acc, item) => {
         acc[item.residue_type] = (acc[item.residue_type] || 0) + parseFloat(item.weight);
         return acc;
@@ -95,7 +145,6 @@ function atualizarDashboard(data) {
 
     totalPesoElement.textContent = `${(pesoTotal / 1000).toFixed(1)} TONELADAS`;
     maisColetadoElement.textContent = `${maisColetadoTipo} ${(maisColetadoPeso / pesoTotal * 100).toFixed(1)}%`;
-    comparativoElement.textContent = "Comparativo atualizado";
 }
 
 // Função para atualizar a tabela
