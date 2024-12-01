@@ -19,15 +19,15 @@
         <section class="summary-section">
             <div class="summary-box">
                 <h2>PESO TOTAL RECICLADO (KG)</h2>
-                <p>10,5 TONELADAS</p>
+                <p id="total-peso">10,5 TONELADAS</p>
             </div>
             <div class="summary-box">
                 <h2>RESÍDUO MAIS COLETADO</h2>
-                <p>Plástico 40%</p>
+                <p id="mais-coletado">Plástico 40%</p>
             </div>
             <div class="summary-box">
                 <h2>COMPARATIVO</h2>
-                <p>+5%</p>
+                <p id="comparativo">+5%</p>
             </div>
         </section>
 
@@ -42,7 +42,7 @@
                         <th>[Peso (kg)]</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tabela-detalhes">
                     <tr>
                         <td>31-10-2024</td>
                         <td>Plástico</td>
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
         </section>
-
+        
         <!-- Modal -->
         <div id="filter-modal" class="modal">
             <div class="modal-content">
@@ -70,32 +70,16 @@
                 <div class="filters">
                     <div>
                         <h3>Selecione o Tipo de Resíduo</h3>
-                        <ul>
-                            <li>Não identificado</li>
-                            <li>Eletronicos e mobilias</li>
-                            <li>Papel</li>
-                            <li>Vidro</li>
-                            <li>Restos Comida</li>
-                            <li>Residuos de vegetação</li>
-                            <li>Plastico</li>
-                            <li>Residuos Limpeza</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Selecione o Mês de Visualização</h3>
-                        <ul>
-                            <li>Janeiro</li>
-                            <li>Fevereiro</li>
-                            <li>Março</li>
-                            <li>Abril</li>
-                            <li>Maio</li>
-                            <li>Junho</li>
-                            <li>Julho</li>
-                            <li>Agosto</li>
-                            <li>Setembro</li>
-                            <li>Outubro</li>
-                            <li>Novembro</li>
-                            <li>Dezembro</li>
+                        <ul id="tipo-filtros">
+                            <li data-type="geral">Mostrar Geral</li>
+                            <li data-type="Não identificado">Não identificado</li>
+                            <li data-type="Eletronicos e mobilias">Eletrônicos e Mobiliário</li>
+                            <li data-type="Papel">Papel</li>
+                            <li data-type="Vidro">Vidro</li>
+                            <li data-type="Restos Comida">Restos de Comida</li>
+                            <li data-type="Residuos de vegetação">Resíduos de Vegetação</li>
+                            <li data-type="plastico">Plástico</li>
+                            <li data-type="Residuos Limpeza">Resíduos de Limpeza</li>
                         </ul>
                     </div>
                 </div>
@@ -114,7 +98,6 @@
         </footer>
     </div>
 
-    <script src="script-dados.js">
-    </script>
+    <script src="script-dados.js"></script>
 </body>
 </html>

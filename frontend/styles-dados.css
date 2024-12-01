@@ -296,3 +296,14 @@ tbody td {
         transform: translateY(0);
     }
 }
+
+.grafico {
+    display: none; /* Inicialmente oculto */
+    text-align: center;
+    margin-top: 20px;
+}
+
+.grafico img {
+    max-width: 80%;
+    height: auto;
+}
