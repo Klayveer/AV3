@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados - Recicla.me</title>
+    <link rel="stylesheet" href="styles-dados.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <a href="index.html" class="back-button">← [Voltar]</a>
+            <h1>RECICLA.ME</h1>
+            <button class="filter-button">[Filtrar]</button>
+        </header>
+
+        <!-- Área de Dados Resumidos -->
+        <section class="summary-section">
+            <div class="summary-box">
+                <h2>PESO TOTAL RECICLADO (KG)</h2>
+                <p>10,5 TONELADAS</p>
+            </div>
+            <div class="summary-box">
+                <h2>RESÍDUO MAIS COLETADO</h2>
+                <p>Plástico 40%</p>
+            </div>
+            <div class="summary-box">
+                <h2>COMPARATIVO</h2>
+                <p>+5%</p>
+            </div>
+        </section>
+
+        <!-- Tabela de Detalhes -->
+        <section class="details-section">
+            <h2>[Tabela de Detalhes]</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>[Data]</th>
+                        <th>[Tipo de Resíduo]</th>
+                        <th>[Peso (kg)]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>31-10-2024</td>
+                        <td>Plástico</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>31-10-2024</td>
+                        <td>Vidro</td>
+                        <td>2670</td>
+                    </tr>
+                    <tr>
+                        <td>31-10-2024</td>
+                        <td>Metal</td>
+                        <td>960</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Modal -->
+        <div id="filter-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Selecione os filtros</h2>
+                <div class="filters">
+                    <div>
+                        <h3>Selecione o Tipo de Resíduo</h3>
+                        <ul>
+                            <li>Não identificado</li>
+                            <li>Eletronicos e mobilias</li>
+                            <li>Papel</li>
+                            <li>Vidro</li>
+                            <li>Restos Comida</li>
+                            <li>Residuos de vegetação</li>
+                            <li>Plastico</li>
+                            <li>Residuos Limpeza</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Selecione o Mês de Visualização</h3>
+                        <ul>
+                            <li>Janeiro</li>
+                            <li>Fevereiro</li>
+                            <li>Março</li>
+                            <li>Abril</li>
+                            <li>Maio</li>
+                            <li>Junho</li>
+                            <li>Julho</li>
+                            <li>Agosto</li>
+                            <li>Setembro</li>
+                            <li>Outubro</li>
+                            <li>Novembro</li>
+                            <li>Dezembro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p class="copyright">RECICLA.ME &copy; COPYRIGHT 2024. <br> Todos os direitos reservados.</p>
+            <div class="social-icons">
+                <img src="src/face.png" alt="Facebook">
+                <img src="src/insta.png" alt="Instagram">
+                <img src="src/tt.png" alt="Twitter">
+                <img src="src/mail.png" alt="Mail">
+            </div>
+        </footer>
+    </div>
+
+    <script src="script-dados.js">
+    </script>
+</body>
+</html>
