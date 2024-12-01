@@ -21,6 +21,7 @@ app.add_middleware(
 # Caminho para o arquivo JSON (atualize para o caminho absoluto correto)
 JSON_FILE_PATH = r"app\data.json"
 
+
 # Função para carregar os dados do JSON
 def load_json_data():
     if not os.path.exists(JSON_FILE_PATH):
