@@ -20,6 +20,8 @@ const totalPesoElement = document.querySelector(".summary-box:nth-child(1) p");
 const maisColetadoElement = document.querySelector(".summary-box:nth-child(2) p");
 const comparativoElement = document.querySelector(".summary-box:nth-child(3) p");
 const tabelaDetalhes = document.querySelector(".details-section table tbody");
+const graficoImg = document.querySelector("#grafico-img"); // Elemento para exibir gráfico
+const graficoSection = document.querySelector("#grafico-section"); // Container da seção de gráficos
 
 // Variáveis para filtros
 let filtroTipo = "";
@@ -47,19 +49,38 @@ function aplicarFiltros(tipo = filtroTipo) {
 
     // Se um tipo específico for selecionado (diferente de "Geral"), adiciona ao endpoint
     if (tipo && tipo !== "Geral" && TIPOS_RESIDUOS.includes(tipo)) {
-        url += `tipo/${encodeURIComponent(tipo)}`; // Corrigido para garantir que o tipo seja adicionado corretamente
+        url += `tipo/${encodeURIComponent(tipo)}`;
     }
 
     console.log("URL chamada: ", url); // Verifica a URL gerada
 
     fetchDados(url, tipo);
+
+    // Exibe o gráfico correspondente ao tipo (gráficos individuais, se necessário)
+    exibirGraficoNoModal(tipo);
+}
+
+// Função para exibir o gráfico no modal
+function exibirGraficoNoModal(tipo) {
+    // Se não houver gráfico, retorna
+    if (!graficoSection || !graficoImg) return;
+
+    // Define o caminho para o gráfico correspondente
+    const caminhoGrafico = `src/${tipo}.png`;
+
+    // Define o src da imagem para o gráfico
+    graficoImg.src = caminhoGrafico;
+    graficoImg.alt = `Gráfico de ${tipo}`;
+
+    // Exibe a seção de gráficos
+    graficoSection.style.display = 'flex';
 }
 
 // Função para buscar dados do backend
 async function fetchDados(url, tipo) {
     try {
         const response = await fetch(url);
-        
+
         if (!response.ok) {
             throw new Error(`Erro na requisição. Status: ${response.status}`);
         }
@@ -165,7 +186,7 @@ function atualizarTabela(data) {
 document.querySelectorAll("#tipo-filtros li").forEach(item => {
     item.addEventListener("click", (event) => {
         const tipoSelecionado = event.target.getAttribute("data-type");
-        
+
         if (TIPOS_RESIDUOS.includes(tipoSelecionado)) {
             filtroTipo = tipoSelecionado;
         } else {

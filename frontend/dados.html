@@ -62,7 +62,7 @@
             </table>
         </section>
         
-        <!-- Modal -->
+        <!-- Modal para Filtros -->
         <div id="filter-modal" class="modal">
             <div class="modal-content">
                 <span class="close-button">&times;</span>
@@ -71,7 +71,7 @@
                     <div>
                         <h3>Selecione o Tipo de Resíduo</h3>
                         <ul id="tipo-filtros">
-                            <li data-type="geral">Mostrar Geral</li>
+                            <li data-type="Geral">Mostrar Geral</li>
                             <li data-type="Não identificado">Não identificado</li>
                             <li data-type="Eletronicos e mobilias">Eletrônicos e Mobiliário</li>
                             <li data-type="Papel">Papel</li>
@@ -85,6 +85,15 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal para Gráfico -->
+        <div id="grafico-anual-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close close-grafico-anual">×</span>
+                <h2>Gráfico de Geração de Resíduo: <span id="grafico-titulo">Tipo</span></h2>
+                <img id="grafico-imagem" src="" alt="Gráfico de Resíduo">
+            </div>
+        </div>        
 
         <!-- Rodapé -->
         <footer class="footer">
