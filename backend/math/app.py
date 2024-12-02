@@ -42,13 +42,11 @@ df['Peso'] = df['Peso'].str.replace(',', '').astype(float)
 # Disable scientific notation
 plt.ticklabel_format(style='plain', useOffset=False, useLocale=False)
 
-# Step 3: Create a plot for each "Tipo Resíduo"
 unique_tipos = df['Tipo Resíduo'].unique()
 
 for tipo in unique_tipos:
     tipo_df = df[df['Tipo Resíduo'] == tipo]
     
-    # Resample the data by month and sum the weights
     tipo_df = tipo_df.set_index('Data').resample('M').sum().reset_index()
     
     plt.figure()

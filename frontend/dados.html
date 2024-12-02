@@ -13,6 +13,7 @@
             <a href="index.html" class="back-button">← [Voltar]</a>
             <h1>RECICLA.ME</h1>
             <button class="filter-button">[Filtrar]</button>
+            <button id="grafico-button" class="hidden">[Gráfico]</button>
         </header>
 
         <!-- Área de Dados Resumidos -->
@@ -87,13 +88,14 @@
         </div>
 
         <!-- Modal para Gráfico -->
-        <div id="grafico-anual-modal" class="modal" style="display: none;">
+        <div id="grafico-anual-modal" class="modal">
             <div class="modal-content">
-                <span class="close close-grafico-anual">×</span>
+                <span class="close-button">&times;</span>
                 <h2>Gráfico de Geração de Resíduo: <span id="grafico-titulo">Tipo</span></h2>
                 <img id="grafico-imagem" src="" alt="Gráfico de Resíduo">
             </div>
-        </div>        
+        </div>    
+       
 
         <!-- Rodapé -->
         <footer class="footer">
