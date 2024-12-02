@@ -1,11 +1,16 @@
 // POSSIMOS PASSOS
 
-para rodar o front: 'npm start' (http://localhost:3000/)
+para rodar o front: live
 para rodar o back: 'uvicorn app.app:app --reload' (http://127.0.0.1:8000/docs#/)
 
-os graficos so serão mostrados para geração de "relatório mensal" - adcioanr dps do front configuado
+ao escolher um tipo de residuo no modal de filtro, automaticamente mostra o grafico.
+mas o grafico so deve ser aberto quando eu apertar o botao de grafico
+
+aumentar o modal do grafico 
+mudar front do botao
 
 ver todos os requirements
 configurar o README 
+hospedar o projeto
 
 # estou usando um json como bd

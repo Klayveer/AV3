@@ -32,7 +32,7 @@ body {
     font-size: 1.5rem;
 }
 
-.back-button,
+.back-button, 
 .filter-button {
     color: black;
     text-decoration: none;
@@ -347,4 +347,10 @@ tbody td {
 
 .hidden {
     display: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }

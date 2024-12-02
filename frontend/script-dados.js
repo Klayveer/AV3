@@ -14,14 +14,15 @@ const TIPOS_RESIDUOS = [
 
 // Seleciona os elementos necessários
 const filterButton = document.querySelector('.filter-button');
-const modal = document.querySelector('#filter-modal');
+const filterModal = document.querySelector('#filter-modal');
+const filterOptions = filterModal.querySelectorAll('.filter-option');
 const closeButton = document.querySelector('.close-button');
 const totalPesoElement = document.querySelector(".summary-box:nth-child(1) p");
 const maisColetadoElement = document.querySelector(".summary-box:nth-child(2) p");
 const comparativoElement = document.querySelector(".summary-box:nth-child(3) p");
 const tabelaDetalhes = document.querySelector(".details-section table tbody");
-const graficoButton = document.getElementById('grafico-button');
-const graficoModal = document.getElementById('grafico-anual-modal');
+const graficoButton = document.querySelector('#grafico-button');
+const graficoModal = document.querySelector('#grafico-anual-modal');
 const graficoCloseButton = graficoModal.querySelector('.close-button');
 const graficoImagem = document.getElementById('grafico-imagem');
 const graficoTitulo = document.getElementById('grafico-titulo');
@@ -29,40 +30,50 @@ const graficoTitulo = document.getElementById('grafico-titulo');
 // Variáveis para filtros
 let filtroTipo = "";
 
-// Abre o modal ao clicar no botão de filtrar
-filterButton.addEventListener('click', () => {
-    modal.style.display = 'flex';
+graficoButton.addEventListener('click', (event) => {
+    // Impede que outros cliques no modal ou em elementos relacionados à abertura do gráfico aconteçam
+    event.stopPropagation();
+    graficoModal.style.display = 'flex'; // Mostra o modal do gráfico
 });
 
-// Fecha o modal ao clicar no botão de fechar
-closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// Fecha o modal ao clicar fora do conteúdo
-window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-// Abre o modal do gráfico
-graficoButton.addEventListener('click', () => {
-    graficoModal.style.display = 'flex';
-});
-
-// Fecha o modal ao clicar no botão de fechar
-graficoCloseButton.addEventListener('click', () => {
+// 2. Fechar o modal de gráfico quando clicar no botão de fechar
+graficoModal.querySelector('.close-button').addEventListener('click', () => {
     graficoModal.style.display = 'none';
 });
 
-// Fecha o modal ao clicar fora do conteúdo
+// 3. Fechar o modal de gráfico quando clicar fora do conteúdo
 window.addEventListener('click', (event) => {
     if (event.target === graficoModal) {
         graficoModal.style.display = 'none';
     }
 });
 
+// 4. Abrir o modal de filtro quando o botão de filtro for pressionado
+filterButton.addEventListener('click', (event) => {
+    // Previne que o evento de clique no filtro abra o gráfico
+    event.stopPropagation();
+    filterModal.style.display = 'flex'; // Abre o filtro
+});
+
+// 5. Fechar o modal de filtro quando o botão de fechar for pressionado
+filterModal.querySelector('.close-button').addEventListener('click', () => {
+    filterModal.style.display = 'none';
+});
+
+// 6. Fechar o modal de filtro quando clicar fora do conteúdo
+window.addEventListener('click', (event) => {
+    if (event.target === filterModal) {
+        filterModal.style.display = 'none';
+    }
+});
+
+// 7. Impedir que a seleção de tipo de resíduo abra o gráfico ao interagir com as opções de filtro
+filterOptions.forEach(option => {
+    option.addEventListener('click', (event) => {
+        // Impede a propagação do evento, evitando que o gráfico seja aberto
+        event.stopPropagation();
+    });
+});
 // Atualiza o filtro e busca os dados filtrados
 function aplicarFiltros(tipo = filtroTipo) {
     let url = BASE_URL;
