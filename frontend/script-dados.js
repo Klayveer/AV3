@@ -20,8 +20,11 @@ const totalPesoElement = document.querySelector(".summary-box:nth-child(1) p");
 const maisColetadoElement = document.querySelector(".summary-box:nth-child(2) p");
 const comparativoElement = document.querySelector(".summary-box:nth-child(3) p");
 const tabelaDetalhes = document.querySelector(".details-section table tbody");
-const graficoImg = document.querySelector("#grafico-img"); // Elemento para exibir gráfico
-const graficoSection = document.querySelector("#grafico-section"); // Container da seção de gráficos
+const graficoButton = document.getElementById('grafico-button');
+const graficoModal = document.getElementById('grafico-anual-modal');
+const graficoCloseButton = graficoModal.querySelector('.close-button');
+const graficoImagem = document.getElementById('grafico-imagem');
+const graficoTitulo = document.getElementById('grafico-titulo');
 
 // Variáveis para filtros
 let filtroTipo = "";
@@ -43,6 +46,23 @@ window.addEventListener('click', (event) => {
     }
 });
 
+// Abre o modal do gráfico
+graficoButton.addEventListener('click', () => {
+    graficoModal.style.display = 'flex';
+});
+
+// Fecha o modal ao clicar no botão de fechar
+graficoCloseButton.addEventListener('click', () => {
+    graficoModal.style.display = 'none';
+});
+
+// Fecha o modal ao clicar fora do conteúdo
+window.addEventListener('click', (event) => {
+    if (event.target === graficoModal) {
+        graficoModal.style.display = 'none';
+    }
+});
+
 // Atualiza o filtro e busca os dados filtrados
 function aplicarFiltros(tipo = filtroTipo) {
     let url = BASE_URL;
@@ -61,19 +81,16 @@ function aplicarFiltros(tipo = filtroTipo) {
 }
 
 // Função para exibir o gráfico no modal
-function exibirGraficoNoModal(tipo) {
-    // Se não houver gráfico, retorna
-    if (!graficoSection || !graficoImg) return;
+function exibirGrafico(tipo) {
+    // Define o caminho do gráfico correspondente
+    const caminhoGrafico = `src/${tipo.toLowerCase()}.png`;
 
-    // Define o caminho para o gráfico correspondente
-    const caminhoGrafico = `src/${tipo}.png`;
+    graficoImagem.src = caminhoGrafico;
+    graficoImagem.alt = `Gráfico de ${tipo}`;
+    graficoTitulo.textContent = tipo;
 
-    // Define o src da imagem para o gráfico
-    graficoImg.src = caminhoGrafico;
-    graficoImg.alt = `Gráfico de ${tipo}`;
-
-    // Exibe a seção de gráficos
-    graficoSection.style.display = 'flex';
+    // Exibe o modal do gráfico
+    graficoModal.style.display = 'flex';
 }
 
 // Função para buscar dados do backend
@@ -189,6 +206,7 @@ document.querySelectorAll("#tipo-filtros li").forEach(item => {
 
         if (TIPOS_RESIDUOS.includes(tipoSelecionado)) {
             filtroTipo = tipoSelecionado;
+            exibirGrafico(tipoSelecionado);
         } else {
             filtroTipo = "Geral";
         }
