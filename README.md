@@ -1,70 +1,146 @@
-# AV3
+# RECICLA.ME
 
-Ver proximos passos
+Este é um projeto que envolve o uso de uma API pública sobre dados de reciclagem, com um backend desenvolvido utilizando o FastAPI para realizar operações CRUD em um arquivo JSON. O frontend foi desenvolvido em HTML, CSS e JavaScript e oferece uma interface interativa para visualização de métricas de reciclagem.
 
-# Residue Management Application
+## Índice
 
-This application is designed to manage and visualize residue data. It consists of a backend API and a frontend client. The backend handles database operations and generates graphs, while the frontend provides a user interface for interacting with the data.
+- [Descrição do Projeto](#descrição-do-projeto)
+- [Funcionalidades do Frontend](#funcionalidades-do-frontend)
+- [Funcionalidades do Backend](#funcionalidades-do-backend)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Como Executar o Projeto](#como-executar-o-projeto)
+- [Estrutura do Backend](#estrutura-do-backend)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Contribuindo](#contribuindo)
+- [Licença](#licença)
 
-## Table of Contents
+## Descrição do Projeto
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup and Installation](#setup-and-installation)
-- [Running the Application](#running-the-application)
-- [Project Structure](#project-structure)
-- [Endpoints](#endpoints)
-- [License](#license)
+Este sistema rastreia dados de reciclagem dos últimos 10 anos e inclui um dashboard para visualizar as seguintes métricas:
 
-## Features
+- **Peso total reciclado**
+- **Material mais reciclado**
+- **Tendências de reciclagem mensais**
 
-- Add, update, and delete residue data.
-- Generate graphs based on residue data.
-- View residue data in a user-friendly interface.
-- Automatically clear old images when the frontend is opened.
+### Funcionalidades do Frontend
 
-## Technologies Used
+- **Charts interativos**: gráficos para visualizar as métricas de reciclagem ao longo do tempo.
+- **Tabelas**: exibição das informações em formato tabular.
+- **Modais**: para exibir detalhes adicionais ou informações contextuais, com funcionalidade de fechamento ao clicar fora deles.
 
-- Python
-- Flask
-- SQLite
-- Pandas
-- Matplotlib
-- Seaborn
-- HTML/CSS
-- JavaScript
+### Funcionalidades do Backend
 
-## Setup and Installation
+- **Operações CRUD**: realiza operações de Create, Read, Update e Delete em um arquivo JSON que armazena os dados de reciclagem.
+- **API**: oferece endpoints RESTful para fornecer os dados de reciclagem.
 
-1. **Clone the repository:**
+## Tecnologias Utilizadas
 
-## Project Structure
+- **Frontend**:
+  - HTML
+  - CSS
+  - JavaScript (para gráficos e interatividade)
+  - Live Server (para desenvolvimento local)
 
-- **static/style.css**: Contains the CSS styles for the frontend.
-- **templates/index.html**: Contains the HTML template for the frontend.
-- **images/**: Directory where generated images are stored.
-- **server.py**: Backend server handling API requests and database operations.
-- **client.py**: Frontend client serving the HTML and clearing the images folder.
-- **math.py**: Script for generating graphs based on residue data.
-- **check_residue_types.py**: Script for checking residue types in the database.
-- **data.db**: SQLite database file.
+- **Backend**:
+  - FastAPI
+  - Uvicorn (servidor ASGI)
 
-## Endpoints
+## Como Executar o Projeto
 
-### Backend API
+### Backend (FastAPI)
 
-- **GET /residues/**: Retrieve all residues.
-- **POST /residues/**: Add a new residue.
-- **PUT /residues/<int:residue_id>**: Update a residue.
-- **DELETE /residues/<int:residue_id>**: Delete a residue.
-- **GET /residue_types/**: Retrieve distinct residue types.
-- **GET /residues/graph_data/**: Retrieve graph data for a specific residue type and date range.
-- **POST /generate_graph**: Generate a graph for a specific residue type and date range.
+1. Clone o repositório:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   ```
 
-### Frontend
+2. Instale as dependências do backend:
+    ```bash
+    pip install -r requirements.txt
+    ``` 
 
-- **GET /**: Serve the frontend HTML.
+3. Inicie o servidor Uvicorn:
 
-## License
+    ```bash
+    uvicorn backend.app.app:app --reload
+    ``` 
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+O backend estará disponível em 'http://127.0.0.1:8000/docs#/'.
+
+### Frontend (HTML, CSS, JavaScript)
+
+1. Navegue até a pasta do frontend.
+
+2. Utilize o Live Server para uma experiência de desenvolvimento mais fluida.
+
+## Estrutura do Backend
+
+- **GET /residuos/**  
+  Retorna os 100 primeiros resíduos.  
+  _Resposta: Lista de resíduos com data, tipo e peso._
+
+- **GET /residuos/{date}**  
+  Retorna resíduos de uma data específica.  
+  _Parâmetro: `date` no formato `YYYY-MM-DD`._  
+  _Resposta: Lista de resíduos para a data fornecida._
+
+- **GET /residuos/mes/{ano_mes}**  
+  Retorna resíduos filtrados por mês e ano.  
+  _Parâmetro: `ano_mes` no formato `YYYY-MM`._  
+  _Resposta: Lista de resíduos para o mês e ano fornecido._
+
+- **GET /residuos/tipo/{residue_type}**  
+  Retorna resíduos filtrados por tipo (por exemplo, papel, metal).  
+  _Parâmetro: `residue_type` é o tipo de resíduo._  
+  _Resposta: Lista de resíduos do tipo especificado._
+
+- **POST /residuos/**  
+  Adiciona um novo resíduo à lista.  
+  _Corpo da requisição: `{ "date": "YYYY-MM-DD", "residue_type": "tipo", "weight": "peso" }`_  
+  _Resposta: Resíduo adicionado._
+
+- **PUT /residuos/**  
+  Atualiza o peso de um resíduo existente.  
+  _Corpo da requisição: `{ "date": "YYYY-MM-DD", "residue_type": "tipo", "weight": "peso" }`_  
+  _Resposta: Resíduo atualizado._
+
+- **DELETE /residuos/**  
+  Exclui um resíduo específico baseado na data, tipo e peso.  
+  _Parâmetros: `date`, `residue_type`, `weight`._  
+  _Resposta: Mensagem de sucesso ou erro._
+
+## Estrutura do Projeto
+
+        
+    .
+    ├── backend/
+    │   ├── app/
+    │   │   ├── app.py
+    │   │   └── data.json
+    │   └── math/
+    │       ├── csv/
+    │       └── app.py
+    ├── frontend/
+    │   ├── csv/
+    │   ├── dados.html
+    │   ├── index.html
+    │   ├── script-dados.js
+    │   ├── sobre.html
+    │   ├── styles-dados.css
+    │   ├── styles-sobre.css
+    │   └── styles.css
+    └── arquivos/
+        ├── csv/
+        └── app.py
+
+## Contribuindo
+
+1. Faça um fork deste repositório.
+
+2. Crie uma nova branch 'git checkout -b feature/nome-da-feature'.
+
+3. Faça suas alterações e envie uma pull request.
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
