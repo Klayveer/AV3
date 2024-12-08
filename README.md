@@ -51,7 +51,7 @@ Este sistema rastreia dados de reciclagem dos últimos 10 anos e inclui um dashb
 
 1. Clone o repositório:
    ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone `https://github.com/Klayveer/RECICLA.ME.git`
    ```
 
 2. Instale as dependências do backend:
@@ -65,7 +65,7 @@ Este sistema rastreia dados de reciclagem dos últimos 10 anos e inclui um dashb
     uvicorn backend.app.app:app --reload
     ``` 
 
-O backend estará disponível em 'http://127.0.0.1:8000/docs#/'.
+O backend estará disponível em `http://127.0.0.1:8000/docs#/`.
 
 ### Frontend (HTML, CSS, JavaScript)
 
@@ -110,7 +110,6 @@ O backend estará disponível em 'http://127.0.0.1:8000/docs#/'.
   _Resposta: Mensagem de sucesso ou erro._
 
 ## Estrutura do Projeto
-
         
     .
     ├── backend/

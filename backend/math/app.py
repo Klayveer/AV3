@@ -11,7 +11,6 @@ df = pd.read_csv(file_path)
 
 df.columns = df.columns.str.strip().str.replace('"', '')
 
-
 df.columns = df.columns.str.replace('Residuo', 'Resíduo')
 
 required_columns = ['Data', 'Tipo Resíduo', 'Peso']

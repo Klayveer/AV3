@@ -38,7 +38,7 @@ def get_residuos():
     data = load_json_data()
     return [
         {"date": item["date"], "residue_type": item["residue_type"], "weight": item["weight"]}
-        for item in data[:100]
+        for item in data[:1000]
     ]
 
 @app.get("/residuos/{date}", response_model=List[Residuo])
