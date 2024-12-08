@@ -51,7 +51,7 @@ Este sistema rastreia dados de reciclagem dos últimos 10 anos e inclui um dashb
 
 1. Clone o repositório:
    ```bash
-   git clone `https://github.com/Klayveer/RECICLA.ME.git`
+   git clone https://github.com/Klayveer/RECICLA.ME.git
    ```
 
 2. Instale as dependências do backend:
@@ -136,7 +136,7 @@ O backend estará disponível em `http://127.0.0.1:8000/docs#/`.
 
 1. Faça um fork deste repositório.
 
-2. Crie uma nova branch 'git checkout -b feature/nome-da-feature'.
+2. Crie uma nova branch `git checkout -b feature/nome-da-feature`.
 
 3. Faça suas alterações e envie uma pull request.
 
